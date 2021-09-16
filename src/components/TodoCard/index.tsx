@@ -41,7 +41,7 @@ export const TodoCard = ({ todo }: TodoCardProps) => {
             </>
           ) : (
             <>
-              <AiFillCheckCircle /> Check Task
+              <AiFillCheckCircle /> Complete
             </>
           )}
         </button>
