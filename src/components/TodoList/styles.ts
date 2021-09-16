@@ -4,8 +4,8 @@ export const Container = styled.ul`
   max-width: 90%;
   margin: 0 auto;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  /* align-items: flex-start;
+  justify-content: flex-start; */
   flex-wrap: wrap;
   padding: 10px;
 

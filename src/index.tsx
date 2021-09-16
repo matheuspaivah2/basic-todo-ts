@@ -43,6 +43,14 @@ createServer({
 
       return schema.create("todos", data);
     });
+
+    this.patch("/todos/:id", (schema, request): any => {
+      const { id } = request.params;
+
+      const data = JSON.parse(request.requestBody);
+
+      return schema.find("todos", id)?.update(data);
+    });
   },
 });
 

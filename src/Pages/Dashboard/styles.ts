@@ -15,4 +15,12 @@ export const Container = styled.main`
       width: 12rem;
     }
   }
+
+  .empty-tasks {
+    margin: 0 auto;
+    margin-top: 3rem;
+    text-align: center;
+    line-height: 2.5rem;
+    font-size: 1rem;
+  }
 `;

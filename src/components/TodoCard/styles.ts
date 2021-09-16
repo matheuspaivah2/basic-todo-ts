@@ -3,15 +3,19 @@ import styled from "styled-components";
 export const Container = styled.li`
   width: 90%;
   margin: 0 auto;
-
+  max-width: 20rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-direction: column;
 
   border-radius: 0.3rem;
   border: 1px solid black;
   margin-bottom: 1.5rem;
   padding: 0.5rem;
+
+  @media (min-width: 1000px) {
+    max-width: 25rem;
+  }
 
   h1 {
     font-size: 1.5rem;

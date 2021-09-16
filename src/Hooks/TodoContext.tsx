@@ -6,6 +6,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import toast from "react-hot-toast";
 import { api } from "../services/api";
 import { TodoProps } from "../Types/types";
 
@@ -37,16 +38,18 @@ export const TodoProvider = ({ children }: TodoProviderPros) => {
       createdAt: new Date(),
     });
 
-    loadTodo()
+    loadTodo();
+    toast.success("Task created");
   }
 
   useEffect(() => {
-    console.log("exe");
     loadTodo();
   }, []);
 
   return (
-    <TodoContext.Provider value={{ userTodo, loadTodo, createTodo, setUserTodo }}>
+    <TodoContext.Provider
+      value={{ userTodo, loadTodo, createTodo, setUserTodo }}
+    >
       {children}
     </TodoContext.Provider>
   );

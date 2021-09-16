@@ -11,10 +11,12 @@ export const Container = styled.nav`
   border-radius: 4px;
   gap: 1rem;
 
-  .content {
-    display: flex;
-    justify-content: space-between;
-    gap: 0.5rem;
+  @media (min-width: 768px) {
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
   }
 
   .add-task {

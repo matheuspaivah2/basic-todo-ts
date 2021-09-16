@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { TodoProvider } from "./Hooks/TodoContext";
 import { Routes } from "./routes";
 import { GlobalStyle } from "./styles/global";
@@ -7,6 +8,7 @@ function App() {
     <TodoProvider>
       <GlobalStyle />
       <Routes />
+      <Toaster />
     </TodoProvider>
   );
 }
