@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.li`
-  max-width: 90%;
+  width: 90%;
   margin: 0 auto;
 
   display: flex;

@@ -1,6 +1,7 @@
 import {
   createContext,
   ReactNode,
+  SetStateAction,
   useContext,
   useEffect,
   useState,
@@ -8,12 +9,13 @@ import {
 import { api } from "../services/api";
 import { TodoProps } from "../Types/types";
 
-type TodoFieldsProps = Omit<TodoProps, "id">;
+type TodoFieldsProps = Omit<TodoProps, "id" | "createdAt">;
 
 interface TodoContextProps {
   userTodo: TodoProps[];
   loadTodo: () => void;
-  creacteTodo: (todo: TodoProps) => Promise<void>;
+  createTodo: (todoFields: TodoFieldsProps) => Promise<void>;
+  setUserTodo: React.Dispatch<SetStateAction<TodoProps[]>>;
 }
 
 interface TodoProviderPros {
@@ -29,14 +31,13 @@ export const TodoProvider = ({ children }: TodoProviderPros) => {
     api.get("todos").then((response) => setUserTodo(response.data.todos));
   };
 
-  async function creacteTodo(todoFields: TodoFieldsProps) {
-    const response = await api.post("/todos", {
+  async function createTodo(todoFields: TodoFieldsProps) {
+    await api.post("/todos", {
       ...todoFields,
       createdAt: new Date(),
     });
-    const { todo } = response.data;
 
-    setUserTodo([...userTodo, todo]);
+    loadTodo()
   }
 
   useEffect(() => {
@@ -45,7 +46,7 @@ export const TodoProvider = ({ children }: TodoProviderPros) => {
   }, []);
 
   return (
-    <TodoContext.Provider value={{ userTodo, loadTodo, creacteTodo }}>
+    <TodoContext.Provider value={{ userTodo, loadTodo, createTodo, setUserTodo }}>
       {children}
     </TodoContext.Provider>
   );
