@@ -4,8 +4,6 @@ export const Container = styled.ul`
   max-width: 90%;
   margin: 0 auto;
   display: flex;
-  /* align-items: flex-start;
-  justify-content: flex-start; */
   flex-wrap: wrap;
   padding: 10px;
 
@@ -21,5 +19,11 @@ export const Container = styled.ul`
       opacity: 100;
       transform: scale(1);
     }
+  }
+
+  > p {
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 3rem;
   }
 `;

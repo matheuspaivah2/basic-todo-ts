@@ -6,16 +6,27 @@ import { Menu } from "../../components/Menu";
 import { useEffect, useState } from "react";
 import { TodoProps } from "../../Types/types";
 export const Dashboard = () => {
-  const { userTodo } = useTodo();
-
+  const { todoList } = useTodo();
+  const [selectedList, setSelectedList] = useState("pending");
   const [incompleteTodoList, setIncompleteTodoList] = useState<TodoProps[]>([]);
+  const [completeTodoList, setCompleteTodoList] = useState<TodoProps[]>([]);
+
+  const handleSelectList = (nameList: string) => {
+    setSelectedList(nameList);
+  };
 
   useEffect(() => {
-    const newList: TodoProps[] = userTodo.filter(
+    const newIncompleteTodoList: TodoProps[] = todoList.filter(
       (l) => l.isCompleted === false
     );
-    setIncompleteTodoList([...newList]);
-  }, [userTodo]);
+    setIncompleteTodoList([...newIncompleteTodoList]);
+
+    const newCompleteTodoList: TodoProps[] = todoList.filter(
+      (l) => l.isCompleted === true
+    );
+
+    setCompleteTodoList([...newCompleteTodoList]);
+  }, [todoList]);
 
   return (
     <Container>
@@ -23,13 +34,11 @@ export const Dashboard = () => {
         <img src={checkListIlustration} alt="checklist" />
         <h1>Tasks</h1>
       </header>
-      <Menu />
-      {incompleteTodoList[0] ? (
-        <TodoList listTodo={incompleteTodoList} />
+      <Menu handleSelectList={handleSelectList} />
+      {selectedList === "pending" ? (
+        <TodoList listTodo={incompleteTodoList} nameList="Pending" />
       ) : (
-        <p className="empty-tasks">
-          No tasks registered! <br /> Add new tasks and organize your routine
-        </p>
+        <TodoList listTodo={completeTodoList} nameList="Finished" />
       )}
     </Container>
   );

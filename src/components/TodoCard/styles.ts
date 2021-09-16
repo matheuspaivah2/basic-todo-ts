@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const Container = styled.li`
+interface ContainerProps {
+  isCompleted: boolean;
+}
+
+export const Container = styled.li<ContainerProps>`
   width: 90%;
   margin: 0 auto;
   max-width: 20rem;
@@ -27,13 +31,13 @@ export const Container = styled.li`
   }
   p + p {
     margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 
   button {
     border: none;
     border-radius: 4px;
     width: 100%;
-
     padding: 0.5rem 0rem;
 
     display: flex;
@@ -42,15 +46,18 @@ export const Container = styled.li`
     font-size: 1rem;
     background-color: var(--black-light);
     margin-bottom: 0.5rem;
-    margin-top: 0.8rem;
+    margin-top: auto;
     color: white;
     position: relative;
+
     svg {
       position: absolute;
       left: 3%;
       width: 2rem;
       height: 3rem;
-      color: var(--blue-light);
+
+      color: ${({ isCompleted }) =>
+        isCompleted ? "#44e3ee" : "var(--blue-light)"};
     }
 
     transition: filter 0.2s;

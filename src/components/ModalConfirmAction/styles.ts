@@ -6,14 +6,14 @@ export const Container = styled.div`
   flex-direction: column;
 
   width: 80%;
-  height: 24rem;
+  height: 16rem;
   background-color: white;
   border: none;
   background: var(--background);
   border-radius: 3px;
 
   position: absolute;
-  margin: 10vh auto;
+  margin: 25vh auto;
   left: 0;
   right: 0;
 
@@ -46,45 +46,35 @@ export const Container = styled.div`
       }
     }
   }
+  p {
+    font-size: 1rem;
+    padding: 1rem;
+    text-align: center;
+  }
 
-  form {
+  div {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
     align-items: center;
     gap: 1rem;
-
-    input {
-      width: 75%;
-      height: 2rem;
-      border: 1px solid black;
-      padding: 0.5rem;
-      border-radius: 3px;
-    }
-
-    textarea {
-      width: 75%;
-      height: 10rem;
-      border: 1px solid black;
-      padding: 0.5rem;
-      border-radius: 3px;
-    }
+    width: 100%;
 
     button {
       border: none;
       border-radius: 4px;
-      width: 75%;
+      width: 40%;
 
       padding: 0.5rem 0rem;
 
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 1.1rem;
+      font-size: 1rem;
       background-color: #3f628b;
       margin-bottom: 0.5rem;
       margin-top: 0.8rem;
       color: white;
-      font-weight: 500;
 
       transition: filter 0.2s;
       &:hover {

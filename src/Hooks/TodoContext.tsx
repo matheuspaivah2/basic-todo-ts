@@ -13,10 +13,10 @@ import { TodoProps } from "../Types/types";
 type TodoFieldsProps = Omit<TodoProps, "id" | "createdAt">;
 
 interface TodoContextProps {
-  userTodo: TodoProps[];
+  todoList: TodoProps[];
   loadTodo: () => void;
   createTodo: (todoFields: TodoFieldsProps) => Promise<void>;
-  setUserTodo: React.Dispatch<SetStateAction<TodoProps[]>>;
+  setTodoList: React.Dispatch<SetStateAction<TodoProps[]>>;
 }
 
 interface TodoProviderPros {
@@ -26,10 +26,10 @@ interface TodoProviderPros {
 const TodoContext = createContext<TodoContextProps>({} as TodoContextProps);
 
 export const TodoProvider = ({ children }: TodoProviderPros) => {
-  const [userTodo, setUserTodo] = useState<TodoProps[]>([]);
+  const [todoList, setTodoList] = useState<TodoProps[]>([]);
 
   const loadTodo = () => {
-    api.get("todos").then((response) => setUserTodo(response.data.todos));
+    api.get("todos").then((response) => setTodoList(response.data.todos));
   };
 
   async function createTodo(todoFields: TodoFieldsProps) {
@@ -48,7 +48,7 @@ export const TodoProvider = ({ children }: TodoProviderPros) => {
 
   return (
     <TodoContext.Provider
-      value={{ userTodo, loadTodo, createTodo, setUserTodo }}
+      value={{ todoList, loadTodo, createTodo, setTodoList }}
     >
       {children}
     </TodoContext.Provider>

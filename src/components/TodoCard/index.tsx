@@ -1,43 +1,56 @@
 import { Container } from "./styles";
 import { TodoProps } from "../../Types/types";
 import { AiFillCheckCircle } from "react-icons/ai";
-import { useTodo } from "../../Hooks/TodoContext";
-import toast from "react-hot-toast";
-import { api } from "../../services/api";
+import { RiRestartFill } from "react-icons/ri";
+import { useState } from "react";
+import { ModalConfirmAction } from "../ModalConfirmAction";
 
 interface TodoCardProps {
   todo: TodoProps;
 }
 
 export const TodoCard = ({ todo }: TodoCardProps) => {
-  const { userTodo, loadTodo } = useTodo();
+  const [openModalConfirm, setOpenModalConfirm] = useState(false);
+
+  const handleModalConfirm = () => {
+    setOpenModalConfirm(!openModalConfirm);
+  };
+
   const capitalize = (str: string) => {
     return str.charAt(0).toUpperCase() + str.substr(1);
   };
 
-  const handleCheck = async () => {
-    userTodo[todo.id - 1]["isCompleted"] = true;
-
-    await api.patch(`/todos/${todo.id}`, {
-      ...userTodo[todo.id - 1],
-    });
-    loadTodo();
-    toast.success("Task completed");
+  const handleCorfirm = async () => {
+    handleModalConfirm();
   };
 
   return (
-    <Container>
-      <h1>{capitalize(todo.title)}</h1>
-      <p>{capitalize(todo.description)}</p>
-      <p>
-        Created at:{" "}
-        {new Intl.DateTimeFormat("pt-BR").format(new Date(todo.createdAt))}
-      </p>
+    <>
+      <Container isCompleted={todo.isCompleted}>
+        <h1>{capitalize(todo.title)}</h1>
+        <p>{capitalize(todo.description)}</p>
+        <p>
+          Created at:{" "}
+          {new Intl.DateTimeFormat("pt-BR").format(new Date(todo.createdAt))}
+        </p>
 
-      <button type="button" onClick={() => handleCheck()}>
-        <AiFillCheckCircle />
-        Check Task
-      </button>
-    </Container>
+        <button type="button" onClick={() => handleCorfirm()}>
+          {todo.isCompleted ? (
+            <>
+              <RiRestartFill /> Revert
+            </>
+          ) : (
+            <>
+              <AiFillCheckCircle /> Check Task
+            </>
+          )}
+        </button>
+      </Container>
+      <ModalConfirmAction
+        openModalConfirm={openModalConfirm}
+        todo={todo}
+        handleModalConfirm={handleModalConfirm}
+      />
+    </>
   );
 };
